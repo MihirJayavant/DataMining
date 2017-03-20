@@ -4,8 +4,8 @@
 It contains classes that implemented some data mining algorithms and also steps on how it solved it.
 This library was built for primary reasons:
   - Steps are shown on how it solved the problem
-  - Take input fron user or text file or any other source and solve it
-  - It was design to help students in data mining field in solving data mining algos and help them understand how it was done
+  - Take input from user or text file or any other source and solve it
+  - It was design to help students in data mining field in solving data mining algorithms and help them understand how it was done
 
 ## Features!
 
@@ -44,4 +44,4 @@ Its a console application to test the output of `DataMining` library
 ```
 
 ## Limitation
-Atleast for now only naivesbayes algorithm is implemented.
+Atleast for now only naives bayes algorithm is implemented.
