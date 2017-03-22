@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<docs>
+  <members name="TableRow">
+    
+    <TableRow>
+      <summary>
+        <c>TableRow</c> structure indicates a row in Table class
+      </summary>
+      <remarks>
+        <para>It contains string aarray which stores column data of a row</para>
+      </remarks>   
+    </TableRow>
+
+    <data>
+      <summary>
+        Each string in this data array is used to store a column data of a single row.
+        Length of data array is same as number of columns in table.
+        columns number starts from 0.
+      </summary>
+    </data>
+    
+  </members>
+
+  <members name="Table">
+    
+    <Table>
+      <summary>
+        <c>Table</c> class is a data structure which reprensents a table.
+        It contains rows and columns and also table header.
+      </summary>
+    </Table>
+
+    <TableConstructor>
+      <sumarry>
+        It takes in <c>TableRow as Parameter which is table header section of <c>table</c> class.
+      </c>
+      </sumarry>
+    </TableConstructor>
+    
+  </members>
+  
+</docs>

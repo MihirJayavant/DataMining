@@ -3,30 +3,20 @@ using System.Collections.Generic;
 
 namespace DataMining
 {
-    /// <summary>
-    /// TableRow structure indicates a row in Table class
-    /// </summary>
+    /// <include file='docs.xml' path='docs/members[@name="TableRow"]/TableRow/*'/>
     public struct TableRow
     {
-        /// <summary>
-        /// Each string in this data array is used to store a column data of a single row.
-        /// Length of data array is same as number of columns in table.
-        /// columns number starts from 0.
-        /// </summary>
+        /// <include file='docs.xml' path='docs/members[@name="TableRow"]/data/*'/>
         public string[] data;
     }
 
-    /// <summary>
-    /// Table class is a data structure which reprensents a table.
-    /// It contains rows and columns and also table header.
-    /// </summary>
+    /// <include file='docs.xml' path='docs/members[@name="Table"]/Table/*'/>
     public class Table : IEnumerable<TableRow>
     {
-        /// <summary>
-        /// Rows are stored in form of a collection list.
-        /// </summary>
+       
         IList<TableRow> tableList;
 
+        /// <include file='docs.xml' path='docs/members[@name="TableConstructor"]/Table/*'/>
         public Table(TableRow columns)
         {
             TotalColumns = columns.data.Length;

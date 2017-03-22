@@ -43,11 +43,11 @@ namespace DataMining
             }
 
             //variables needed
-            IList<Tuple<float, float>> neededProbablilities = new List<Tuple<float, float>>();
+            IList<(float yes, float no)> neededProbablilities = new List<(float, float)>();
             float yes = 0, no = 0;
             float yesProbability = (float) totalYes / (totalYes + totalNo);
             float noProbability = (float) totalNo / (totalYes + totalNo);
-            Tuple<float, float> values;
+            (float yes, float no) values;
 
             for (int i = 0; i < totalColumns - 1; i++)
             {
@@ -59,9 +59,9 @@ namespace DataMining
             foreach (var value in neededProbablilities)
             {
                 if (yes == 0)
-                    yes = value.Item1;
+                    yes = value.yes;
                 else
-                    yes *= value.Item1;
+                    yes *= value.yes;
             }
             yes *= yesProbability;
 
@@ -69,15 +69,17 @@ namespace DataMining
             foreach (var value in neededProbablilities)
             {
                 if (no == 0)
-                    no = value.Item2;
+                    no = value.no;
                 else
-                    no *= value.Item2;
+                    no *= value.no;
             }
             no *= noProbability;
 
-            IDictionary<string, float> probability = new Dictionary<string, float>();
-            probability.Add("yes", yes);
-            probability.Add("no", no);
+            IDictionary<string, float> probability = new Dictionary<string, float>
+            {
+                { "yes", yes },
+                { "no", no }
+            };
             return probability;
         }
 
@@ -86,7 +88,7 @@ namespace DataMining
             IList<string> names = new List<string>();
             Table groupTable;
             TableRow groupRow;
-            Tuple<float, float> tuple;
+            (float yes, float no) tuple;
             string[] s = {table.ColumnNames.data[column], "yes", "no" };
 
             groupRow.data = s;
@@ -100,8 +102,8 @@ namespace DataMining
                     tuple = GetProbabilityOf(column, row.data[column]);
                     s = new string[3];
                     s[0] = row.data[column];
-                    s[1] = tuple.Item1 + "";
-                    s[2] = tuple.Item2 + "";
+                    s[1] = tuple.yes + "";
+                    s[2] = tuple.no + "";
                     groupRow.data = s;
                     groupTable.Add(groupRow);
                 }
@@ -109,7 +111,7 @@ namespace DataMining
             return groupTable;
         }
 
-        private Tuple<float,float> GetProbabilityOf(int column, string name)
+        private (float yes, float no) GetProbabilityOf(int column, string name)
         {
             float yes = 0, no = 0;
 
@@ -125,7 +127,7 @@ namespace DataMining
                         no++;
                 }
             }
-            return Tuple.Create<float,float>( yes/totalYes, no/totalNo);
+            return ( yes/totalYes, no/totalNo);
         }
 
         private void Compute_Yes_No()
@@ -142,7 +144,7 @@ namespace DataMining
             }
         }
 
-        private Tuple<float,float> GetProbabilityFrom(Table table, string name)
+        private (float yes, float no) GetProbabilityFrom(Table table, string name)
         {
             float yes = 0, no = 0;
 
@@ -155,7 +157,7 @@ namespace DataMining
                     break;
                 }
             }
-            return Tuple.Create<float, float>(yes, no);
+            return (yes, no);
         }
     }
 }
