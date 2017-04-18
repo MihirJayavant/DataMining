@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 
 namespace DataMining
 {
@@ -11,12 +12,12 @@ namespace DataMining
     }
 
     /// <include file='docs.xml' path='docs/members[@name="Table"]/Table/*'/>
-    public class Table : IEnumerable<TableRow>
+    public class Table : ITable
     {
        
         IList<TableRow> tableList;
 
-        /// <include file='docs.xml' path='docs/members[@name="TableConstructor"]/Table/*'/>
+        /// <include file='docs.xml' path='docs/members[@name="Table"]/TableConstructor/*'/>
         public Table(TableRow columns)
         {
             TotalColumns = columns.data.Length;
@@ -37,6 +38,7 @@ namespace DataMining
             }
         }
 
+        ///<include file='docs.xml' path='docs/members[@name="Table"]/propertise/ColumnNames/*'/>
         public TableRow ColumnNames
         {
             private set;
@@ -76,6 +78,67 @@ namespace DataMining
         IEnumerator<TableRow> IEnumerable<TableRow>.GetEnumerator()
         {
             return (IEnumerator<TableRow>) GetEnumerator();
+        }
+
+        public static string FormatTable(Table table)
+        {
+            int[] lengths = FindMaxColumnLenghts(table);
+            StringBuilder s = new StringBuilder("");
+
+            for (int i = 0; i < lengths.Length; i++)
+            {
+                s.Append(AddPadding(table.ColumnNames.data[i], lengths[i]) + " ");
+            }
+
+            s.Append("\n");
+
+            for (int i = 0; i < table.TotalRows; i++)
+            {
+                for (int j = 0; j < table.TotalColumns; j++)
+                {
+                    s.Append($"{ AddPadding(table[i].data[j], lengths[j]) } ");
+                }
+                s.Append("\n");
+            }
+
+            return s.ToString();
+        }
+
+        private static int[] FindMaxColumnLenghts(Table table)
+        {
+            int len = table.ColumnNames.data.Length;
+            int[] lengths = new int[len];
+
+            for (int i = 0; i < len; i++)
+            {
+                if (lengths[i] < table.ColumnNames.data[i].Length)
+                {
+                    lengths[i] = table.ColumnNames.data[i].Length;
+                }
+            }
+
+            for (int i = 0; i < table.TotalRows; i++)
+            {
+                for (int j = 0; j < len; j++)
+                {
+                    if (lengths[j] < table[i].data[j].Length)
+                    {
+                        lengths[j] = table[i].data[j].Length;
+                    }
+                }
+            }
+
+            return lengths;
+        }
+
+        private static string AddPadding(string s, int size)
+        {
+            StringBuilder s2 = new StringBuilder(s);
+            for (int i = s.Length; i <= size; i++)
+            {
+                s2.Append(' ');
+            }
+            return s2.ToString();
         }
     }
 }

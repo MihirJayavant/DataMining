@@ -32,10 +32,19 @@
 
     <TableConstructor>
       <sumarry>
-        It takes in <c>TableRow as Parameter which is table header section of <c>table</c> class.
-      </c>
+        It takes in <c>TableRow</c> as Parameter which is table header section of <c>table</c> class.
       </sumarry>
     </TableConstructor>
+
+    <propertise>
+
+      <ColumnNames>
+        <summary>
+          It is Table header represented by type <c>TableRow</c>
+        </summary>
+      </ColumnNames>
+      
+    </propertise>
     
   </members>
   
