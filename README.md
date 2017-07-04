@@ -1,5 +1,5 @@
 # DataMining library in c#
->version 1.0.0
+>version 1.1.0
 
 It contains classes that implemented some data mining algorithms and also steps on how it solved it.
 This library was built for primary reasons:
@@ -31,12 +31,12 @@ Its a console application to test the output of `DataMining` library
             Console.WriteLine("Answer is " + ans.ans);
 
             Console.WriteLine("\nGiven table was as follows:");
-            Console.WriteLine(NaivesBayesHelper.FormatTable(ans.table));
+            Console.WriteLine(Table.FormatTable(ans.table));
 
             Console.WriteLine("\nSolution is as follows:\nGroup tables generated are:\n");
             foreach (var table in ans.groupTable)
             {
-                Console.WriteLine(NaivesBayesHelper.FormatTable(table) + "\n");
+                Console.WriteLine(Table.FormatTable(table) + "\n");
             }
             Console.WriteLine("Yes probability: " + ans.yesProbability + "\nNo probability: " + ans.noProbability);
             Console.WriteLine("Answer is " + ans.ans);
